@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>youlook opie</title>
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            min-height: 100vh;
+            font-family: 'Georgia', serif;
+            scroll-behavior: smooth;
+            padding-bottom: 80px; /* Space for footer */
+            margin: 0;
+        }
+
+        p{
+            margin: 5px;
+        }
+
+        .container {
+            margin: 70px;
+            display:flex;
+            flex-wrap: wrap;
+            gap: 10px 120px;
+        }
+
+        /* Header Section */
+        .header {
+            position: relative;
+            width: 100%;
+            height: 60vh;
+            background: linear-gradient(to right, #ffcc99, #ff6699); /* Lighter gradient */
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            animation: fadeIn 2s ease-out;
+            overflow: hidden; /* Ensures flower petals are contained */
+        }
+
+        .header h1 {
+            font-size: 4rem;
+            font-weight: bold;
+            opacity: 0;
+            animation: slideIn 1.5s ease-out forwards;
+        }
+
+        .header p {
+            font-size: 1.5rem;
+            margin-top: 20px;
+            opacity: 0;
+            animation: fadeInText 3s ease-out forwards;
+            animation-delay: 2s;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            background: linear-gradient(to right, #ff6a00, #ee0979);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            animation: fadeIn 2s ease-out;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: bold;
+            opacity: 0;
+            animation: slideIn 1.5s ease-out forwards;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-top: 20px;
+            opacity: 0;
+            animation: fadeInText 3s ease-out forwards;
+            animation-delay: 2s;
+        }
+
+        /* About Section */
+        .section {
+            padding: 50px 20px;
+            text-align: center;
+            background-color: #fff;
+            width: 100%;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+            margin-top: -100px;
+            z-index: 1;
+            animation: slideUp 2s ease-out forwards;
+        }
+
+        .section h2 {
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 30px;
+            opacity: 0;
+            animation: slideIn 1.5s ease-out forwards;
+        }
+
+        .section p {
+            font-size: 1.1rem;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            animation: fadeInText 2.5s ease-out forwards;
+        }
+
+        /* Photo Gallery Section */
+        .photo-gallery {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 50px;
+            animation: fadeIn 3s ease-out;
+            perspective: 1000px; /* For 3D effect */
+        }
+
+        .photo-gallery img {
+            border-radius: 10px;
+            width: 300px;
+            height: 300px;
+            object-fit: cover;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.5s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+
+        .photo-gallery img:hover {
+            transform: rotateY(180deg);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .photo-gallery img::after {
+            content: "Love Forever";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotateY(180deg);
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .photo-gallery img:hover::after {
+            opacity: 1;
+        }
+
+        /* Footer Section */
+        .footer {
+            background-color: #222;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            width: 100%;
+            position: relative; 
+            bottom: 0;
+            left: 0;
+        }
+
+        .footer p {
+            font-size: 1rem;
+            opacity: 0;
+            animation: fadeInText 3s ease-out forwards;
+            animation-delay: 5s;
+        }
+
+        .footer a {
+            color: #ff6a00;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .footer a:hover {
+            color: #ee0979;
+        }
+
+        /* Emoji Animations */
+        @keyframes emojiFloat {
+            0% {
+                transform: translateY(0) scale(1) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) scale(1.5) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .emoji {
+            position: absolute;
+            font-size: 3rem;
+            pointer-events: none;
+            animation: emojiFloat 3s ease-in-out forwards;
+            z-index: 1000;
+            opacity: 0;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        @keyframes fadeInText {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            0% { transform: translateY(50px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            0% { transform: translateY(30px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        /* Heart Shape for Camera Feed */
+        .camera-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 998;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #cameraFeed {
+            width: 300px;
+            height: 300px;
+            object-fit: cover;
+            background-color: red;
+            clip-path: polygon(50% 0%, 100% 20%, 100% 80%, 50% 100%, 0% 80%, 0% 20%); /* Heart Shape */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5); /* Added shadow for beauty */
+            filter: brightness(1.2) contrast(1.2) saturate(1.2); /* Beauty effect */
+            animation: pulse 3s infinite ease-in-out; /* Soft pulse effect */
+        }
+
+        /* Pulse effect for camera feed */
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /* Butterfly Emoji Styles */
+        @keyframes butterflyFly {
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(var(--x), var(--y)) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .butterfly {
+            position: absolute;
+            font-size: 2rem; /* Size of butterfly emoji */
+            animation: butterflyFly 4s infinite ease-in-out;
+            pointer-events: none;
+        }
+
+        /* Colorful 3D Button for "Wanna see princess?" */
+        .camera-btn-container {
+            margin-top: 30px;
+        }
+
+        .camera-btn {
+            background: linear-gradient(45deg, #ff69b4, #ff6347, #ffd700, #7fff00, #8a2be2);
+            background-size: 400% 400%;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: bold;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            text-transform: uppercase;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease-in-out;
+            animation: gradientBackground 4s ease infinite;
+            transform: perspective(100px) rotateX(10deg);
+        }
+
+        .camera-btn:hover {
+            transform: scale(1.1) perspective(100px) rotateX(0deg);
+            box-shadow: 0 15px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .camera-btn:active {
+            transform: scale(0.95) perspective(100px) rotateX(0deg);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        @keyframes gradientBackground {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <div class="header">
+        <div>
+            <h1>pukuli and rijal</h1>
+            <p>Every chapter with you feels like a fairy tale come true.</p>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <div class="hero">
+        <div>
+            <h1>For My Fuluuu</h1>
+            <p>Every moment with you is a dream come true.</p>
+        </div>
+    </div>
+
+    <!-- About Section -->
+    <div class="section">
+        <h2>About Us</h2>
+        <p>Our journey together has been filled with love, laughter, and unforgettable memories. I cherish every moment with you.</p>
+        <button class="start-btn" onclick="scrollToGallery()">See Our Memories</button>
+    </div>
+
+    <!-- Photo Gallery Section -->
+    <div class="section">
+        <h2>Our Beautiful Memories</h2>
+        <div class="photo-gallery">
+            <img src="img1.jpg" alt="Memory 1">
+            <img src="img9.jpg" alt="Memory 2">
+            <img src="img3.jpg" alt="Memory 3">
+            <img src="img4.jpg" alt="Memory 4">
+        </div>
+    </div>
+
+    <!-- More Pictures Section -->
+    <div class="more-pictures">
+        <h2>More Memories</h2>
+        <div class="photo-gallery">
+            <img src="img5.jpg" alt="Memory 5">
+            <img src="img6.jpg" alt="Memory 6">
+            <img src="img2.jpg" alt="Memory 7">
+            <img src="img8.jpg" alt="Memory 8">
+        </div>
+    </div>
+
+    <!-- Footer Section -->
+    <div class="footer">
+        <p>With all my love, always. &copy; 2025</p>
+        <p><a href="mailto:your-email@example.com">Contact Me</a></p>
+    </div>
+
+    <!-- Camera Button -->
+    <div class="camera-btn-container">
+        <button class="camera-btn" id="openCameraBtn">Wanna see princess?</button>
+    </div>
+
+    <!-- Video container to display the live camera feed -->
+    <div class="camera-container">
+        <video id="cameraFeed" width="100%" height="auto" autoplay></video>
+    </div>
+
+    <!-- JavaScript for accessing the camera -->
+    <script>
+        const openCameraBtn = document.getElementById('openCameraBtn');
+        const cameraContainer = document.querySelector('.camera-container');
+        const cameraFeed = document.getElementById('cameraFeed');
+
+        openCameraBtn.addEventListener('click', () => {
+            cameraContainer.style.display = 'flex';
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then((stream) => {
+                    cameraFeed.srcObject = stream;
+                })
+                .catch((error) => {
+                    alert("Error accessing camera: " + error.message);
+                });
+        });
+
+        cameraContainer.addEventListener('click', () => {
+            cameraContainer.style.display = 'none';
+            const stream = cameraFeed.srcObject;
+            if (stream) {
+                const tracks = stream.getTracks();
+                tracks.forEach((track) => track.stop());
+            }
+        });
+
+        // Add butterfly flying effect with emoji
+        document.addEventListener('mousemove', function (event) {
+            const butterfly = document.createElement('div');
+            butterfly.classList.add('butterfly');
+            butterfly.textContent = '🦋'; // Butterfly emoji
+            document.body.appendChild(butterfly);
+
+            const colors = ['#FF69B4', '#FF6347', '#FFD700', '#7FFF00', '#8A2BE2'];
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            butterfly.style.color = randomColor;
+
+            butterfly.style.left = `${event.pageX - 15}px`; // Center the butterfly at pointer
+            butterfly.style.top = `${event.pageY - 15}px`;
+
+            // Set random movement
+            butterfly.style.setProperty('--x', `${Math.random() * 400 - 200}px`);
+            butterfly.style.setProperty('--y', `${Math.random() * 400 - 200}px`);
+            
+            setTimeout(() => {
+                butterfly.remove();
+            }, 4000); // Butterfly disappears after animation completes
+        });
+    </script>
+
+</body>
+</html>
